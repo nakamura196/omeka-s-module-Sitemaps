@@ -52,8 +52,19 @@ class SitemapsController extends AbstractActionController {
         
         $view->setVariable('site', $site);
         $view->setVariable('items', $items);
-        $view->setVariable('itemsets', $itemsets);
-        $view->setVariable('pages', $pages);
+
+        $sitemaps_include_pages = $siteSettings->get('sitemaps_include_pages', null);
+        if($sitemaps_include_pages) {
+            $view->setVariable('pages', $pages);
+        } else {
+            $view->setVariable('pages', array());
+        }
+        $sitemaps_include_itemsets = $siteSettings->get('sitemaps_include_itemsets', null);
+        if($sitemaps_include_itemsets) {
+            $view->setVariable('itemsets', $itemsets);
+        } else {
+            $view->setVariable('itemsets', array());
+        }
         $view->setTerminal(true);
         
         return $view;

@@ -87,6 +87,8 @@ class Module extends AbstractModule
         $form = $event->getTarget();
         
         $siteSettings = $form->getSiteSettings();
+
+        // 
         
         $form->add([
             'type' => 'fieldset',
@@ -113,7 +115,39 @@ class Module extends AbstractModule
                         )
                 )
             )
-            );
+        );
+
+        $rsFieldset->add(
+            array(
+                'name' => 'sitemaps_include_itemsets',
+                'type' => 'Checkbox',
+                'options' => array(
+                    'label' => 'Include item sets', // @translate
+                ),
+                'attributes' => array(
+                    'value' => (bool) $siteSettings->get(
+                        'sitemaps_include_itemsets',
+                        true
+                        )
+                )
+            )
+        );
+        
+        $rsFieldset->add(
+            array(
+                'name' => 'sitemaps_include_pages',
+                'type' => 'Checkbox',
+                'options' => array(
+                    'label' => 'Include pages', // @translate
+                ),
+                'attributes' => array(
+                    'value' => (bool) $siteSettings->get(
+                        'sitemaps_include_pages',
+                        true
+                        )
+                )
+            )
+        );
         return;
     }
 }
